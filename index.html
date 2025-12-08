@@ -3,87 +3,844 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon</title>
+    <title>Portfolio - Bhone Myat Oo</title>
     <link rel="icon" href="/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
         }
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
+        
+        html {
+            scroll-behavior: smooth;
         }
-        .delay-1 { animation-delay: 0.2s; opacity: 0; }
-        .delay-2 { animation-delay: 0.4s; opacity: 0; }
-        .delay-3 { animation-delay: 0.6s; opacity: 0; }
+        
+        /* Scroll animations */
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .scroll-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Floating tech icons */
+        .tech-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .tech-icon:hover {
+            transform: translateY(-10px);
+        }
+        
+        /* Navbar scroll effect */
+        .navbar {
+            transition: all 0.3s ease;
+            background: #3b82f6;
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+        }
+        
+        .navbar.scrolled {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+        
+        /* Project card hover effect */
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.2);
+        }
+        
+        /* Slideshow */
+        .slide {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            z-index: 0;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+        
+        .slide-btn {
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .slide-btn:hover {
+            background-color: rgba(59, 130, 246, 0.8);
+        }
+        
+        /* Hero section - WHITE BACKGROUND */
+        .animated-gradient {
+            background: #ffffff;
+            position: relative;
+            overflow: visible;
+            z-index: 1;
+        }
+        
+        /* Floating design elements that respond to scroll - BLUE COLOR */
+        .design-element {
+            position: absolute;
+            transition: transform 0.1s ease-out;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .design-element-1 {
+            top: 15%;
+            left: 8%;
+            width: 120px;
+            height: 120px;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .design-element-2 {
+            bottom: 20%;
+            right: 10%;
+            width: 140px;
+            height: 140px;
+            animation: float 8s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        /* Mobile menu dropdown */
+        .mobile-menu {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .mobile-menu a {
+            transition: all 0.3s ease;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+        }
+        
+        .mobile-menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+        
+        /* Dot indicator */
+        .dot {
+            cursor: pointer;
+            height: 10px;
+            width: 10px;
+            margin: 0 4px;
+            background-color: #94a3b8;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+        
+        .dot.active, .dot:hover {
+            background-color: #3b82f6;
+        }
     </style>
 </head>
-<body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 min-h-screen flex items-center justify-center p-4">
-    <div class="max-w-2xl w-full text-center">
-        <!-- Main Content -->
-        <div class="fade-in">
-            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
-                Coming Soon😉
-            </h1>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Navigation Bar -->
+    <nav class="navbar fixed top-0 left-0 right-0 z-50 px-5 py-2">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#hero" class="flex items-center">
+                <img src="./logo-white.png" alt="Logo" class="h-12 w-auto">
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#hero" class="text-white hover:text-blue-100 transition-colors font-medium">Home</a>
+                <a href="#about" class="text-white hover:text-blue-100 transition-colors font-medium">About</a>
+                <a href="#techstack" class="text-white hover:text-blue-100 transition-colors font-medium">Tech Stack</a>
+                <a href="#projects" class="text-white hover:text-blue-100 transition-colors font-medium">Projects</a>
+                <a href="#contact" class="text-white hover:text-blue-100 transition-colors font-medium">Contact</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 mobile-menu">
+            <div class="flex flex-col space-y-2 p-4">
+                <a href="#hero" class="text-white hover:bg-white/20 transition-colors font-medium rounded-lg px-4 py-3">Home</a>
+                <a href="#about" class="text-white hover:bg-white/20 transition-colors font-medium rounded-lg px-4 py-3">About</a>
+                <a href="#techstack" class="text-white hover:bg-white/20 transition-colors font-medium rounded-lg px-4 py-3">Tech Stack</a>
+                <a href="#projects" class="text-white hover:bg-white/20 transition-colors font-medium rounded-lg px-4 py-3">Projects</a>
+                <a href="#contact" class="text-white hover:bg-white/20 transition-colors font-medium rounded-lg px-4 py-3">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Design Elements -->
+    <section id="hero" class="animated-gradient min-h-screen flex items-center justify-center px-6 relative" style="overflow: hidden;">
+        <!-- Design Element 1 - Geometric Star (BLUE) -->
+        <div class="design-element design-element-1" style="z-index: 0;">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M60 10L70 50L110 60L70 70L60 110L50 70L10 60L50 50L60 10Z" fill="#3b82f6" opacity="0.4"/>
+                <circle cx="60" cy="60" r="15" stroke="#60a5fa" stroke-width="2" fill="none"/>
+            </svg>
         </div>
         
-        <div class="fade-in delay-1">
-            <p class="text-xl md:text-2xl text-slate-300 mb-8">
-                This portfolio is currently under construction. Check back soon.
-            </p>
+        <!-- Design Element 2 - Abstract Lines (BLUE) -->
+        <div class="design-element design-element-2" style="z-index: 0;">
+            <svg viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 70 Q40 30, 70 50 T120 70" stroke="#3b82f6" stroke-width="3" opacity="0.4"/>
+                <path d="M20 90 Q40 50, 70 70 T120 90" stroke="#60a5fa" stroke-width="3" opacity="0.4"/>
+                <circle cx="70" cy="70" r="20" stroke="#3b82f6" stroke-width="2" fill="none"/>
+                <circle cx="30" cy="70" r="8" fill="#60a5fa" opacity="0.5"/>
+                <circle cx="110" cy="70" r="8" fill="#3b82f6" opacity="0.5"/>
+            </svg>
         </div>
         
-        
-        <!-- Social Media Section -->
-        <div class="fade-in delay-2 mt-12">
-            <p class="text-slate-300 text-lg mb-6">
-                Meanwhile, check out my socials
-            </p>
-            <div class="flex justify-center gap-6">
-                <!-- Facebook -->
-                <a href="https://www.facebook.com/share/16dxn4v7jA/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" 
-                   class="text-slate-400 hover:text-blue-500 transition-colors duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                </a>
+        <div class="max-w-4xl w-full text-center" style="z-index: 10; position: relative;">
+            <div class="scroll-fade visible">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 text-slate-900">
+                    Hi, I'm <span class="text-blue-700">Bhone Myat Oo</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-700 mb-8 font-medium">
+                    Final Year Student at University of Greenwich
+                </p>
+                <p class="text-lg text-slate-600 mb-12 max-w-2xl mx-auto">
+                    I specialize in web-development and mobile development, with in-depth skills in front-end design.
+                </p>
+                <div class="flex justify-center gap-4">
+                    <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg">
+                        View My Work
+                    </a>
+                    <a href="#contact" class="border-2 border-slate-700 hover:bg-slate-700 hover:text-white text-slate-700 px-8 py-3 rounded-lg font-semibold transition-colors">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About Me Section -->
+    <section id="about" class="py-20 px-6 bg-slate-100">
+        <div class="max-w-5xl mx-auto">
+            <div class="scroll-fade">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-slate-900">About Me</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-12"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="scroll-fade">
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg h-96 flex items-center justify-center text-white overflow-hidden">
+                       <img src="images/me.jpg" alt="Profile Photo">
+                    </div>
+                </div>
                 
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/ffelix_xdd?igsh=b3dieG16eDRldXQ%3D&utm_source=qr" target="_blank" rel="noopener noreferrer"
-                   class="text-slate-400 hover:text-pink-500 transition-colors duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                    </svg>
-                </a>
+               <div class="scroll-fade">
+                    <h3 class="text-2xl font-semibold mb-4 text-slate-900">Hello! I'm Bhone Myat Oo</h3>
+                    <p class="text-slate-600 mb-4 leading-relaxed">
+                       22-year-old Final Year Computer Science student, passionate in software development, specializing in Front-end design.
+                    </p>
+                    <p class="text-slate-600 mb-4 leading-relaxed">
+                       I have worked on several individual projects, experimenting various development methods and principles. Still learning progressively to improve my skills and extend my knowledge in Technology.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed">
+                       My goal is to establish a strong career in software development and build more personal projects that can make daily lives a little bit easier.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="techstack" class="py-20 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="scroll-fade">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-slate-900">Tech Stack</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-4"></div>
+                <p class="text-center text-slate-600 mb-12">Technologies I work with</p>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <!-- PHP -->
+                <div class="scroll-fade tech-icon">
+                    <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
+                        <div class="w-20 h-20 mx-auto mb-4 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <img src="svg/php.svg" alt="PHP">
+                        </div>
+                        <h3 class="font-semibold text-lg text-slate-900">PHP</h3>
+                    </div>
+                </div>
                 
-                <!-- LinkedIn -->
-                <a href="https://www.linkedin.com/in/bhone-myat-oo-87120224b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener noreferrer"
-                   class="text-slate-400 hover:text-blue-400 transition-colors duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                </a>
+                <!-- Laravel -->
+                <div class="scroll-fade tech-icon">
+                    <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
+                        <div class="w-20 p-3 h-20 mx-auto mb-4 bg-red-100 rounded-lg flex items-center justify-center">
+                            <img src="svg/laravel.svg" alt="Laravel">
+                        </div>
+                        <h3 class="font-semibold text-lg text-slate-900">Laravel</h3>
+                    </div>
+                </div>
                 
-                <!-- GitHub -->
-                <a href="https://github.com/BhoneMyatOo17" target="_blank" rel="noopener noreferrer"
-                   class="text-slate-400 hover:text-white transition-colors duration-300">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
+                <!-- JavaScript -->
+                <div class="scroll-fade tech-icon">
+                    <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
+                        <div class="w-20 h-20 p-1 mx-auto mb-4 bg-yellow-100 rounded-lg flex items-center justify-center">
+                            <img src="svg/js.svg" alt="JavaScript">
+                        </div>
+                        <h3 class="font-semibold text-lg text-slate-900">JavaScript</h3>
+                    </div>
+                </div>
+                
+                <!-- Kotlin -->
+                <div class="scroll-fade tech-icon">
+                    <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
+                        <div class="w-20 p-3 h-20 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <img src="svg/kotlin.svg" alt="Kotlin">
+                        </div>
+                        <h3 class="font-semibold text-lg text-slate-900">Kotlin</h3>
+                    </div>
+                </div>
+                
+                <!-- React Native -->
+                <div class="scroll-fade tech-icon">
+                    <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
+                        <div class="w-20 h-20 p-1 mx-auto mb-4 bg-cyan-100 rounded-lg flex items-center justify-center">
+                             <img src="svg/react.svg" alt="React Native">
+                        </div>
+                        <h3 class="font-semibold text-lg text-slate-900">React Native</h3>
+                    </div>
+                </div>
+                
+                <!-- C# -->
+                <div class="scroll-fade tech-icon">
+                    <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
+                        <div class="w-20 h-20 p-2 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <img src="svg/c_sharp.svg" alt="C#">
+                        </div>
+                        <h3 class="font-semibold text-lg text-slate-900">C#</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6 bg-slate-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="scroll-fade">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-slate-900">My Projects</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-4"></div>
+                <p class="text-center text-slate-600 mb-12">A selection of my recent work</p>
+            </div>
+            
+            <!-- Project 1 -->
+            <div class="scroll-fade project-card bg-slate-50 rounded-2xl overflow-hidden shadow-lg mb-12">
+                <div class="grid md:grid-cols-2">
+                    <div class="p-8 flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold mb-4 text-slate-900">SafeSurf</h3>
+                        <p class="text-blue-600 font-semibold mb-4">Language: PHP & JavaScript</p>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                           Social Media Campaign website for teenagers regarding online safety measures.
+                        </p>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-2">
+                                View Demo 
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="relative bg-slate-200 min-h-[200px]" data-slideshow="1">
+                        <div class="slide active absolute inset-0 flex items-center justify-center text-slate-400">
+                            <img src="images/p11.png" alt="SafeSurf Screenshot 1">
+                        </div>
+                        <div class="slide absolute inset-0 flex items-center justify-center text-slate-400">
+                           <img src="images/p12.png" alt="SafeSurf Screenshot 2">
+                        </div>
+                        <div class="slide absolute inset-0 flex items-center justify-center text-slate-400">
+                            <img src="images/p13.png" alt="SafeSurf Screenshot 3">
+                        </div>
+                        
+                        <button class="slide-btn absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/70 hover:bg-blue-600 text-slate-800 hover:text-white rounded-full p-2 z-10" onclick="changeSlide(-1, 1)">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button class="slide-btn absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/70 hover:bg-blue-600 text-slate-800 hover:text-white rounded-full p-2 z-10" onclick="changeSlide(1, 1)">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                        
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex z-10">
+                            <span class="dot active" onclick="currentSlide(1, 1)"></span>
+                            <span class="dot" onclick="currentSlide(2, 1)"></span>
+                            <span class="dot" onclick="currentSlide(3, 1)"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="scroll-fade project-card bg-slate-50 rounded-2xl overflow-hidden shadow-lg mb-12">
+                <div class="grid md:grid-cols-2">
+                    <div class="order-2 md:order-1 relative bg-slate-200 min-h-[250px]" data-slideshow="2">
+                        <div class="slide active absolute inset-0 flex items-center justify-center text-slate-400">
+                            <img src="images/p21.png" alt="Urban Brew Screenshot 1">
+                        </div>
+                        <div class="slide absolute inset-0 flex items-center justify-center text-slate-400">
+                            <img src="images/p22.png" alt="Urban Brew Screenshot 2">
+                        </div>
+                        <div class="slide absolute inset-0 flex items-center justify-center text-slate-400">
+                            <img src="images/p23.png" alt="Urban Brew Screenshot 3">
+                        </div>
+                        
+                        <button class="slide-btn absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/70 hover:bg-blue-600 text-slate-800 hover:text-white rounded-full p-2 z-10" onclick="changeSlide(-1, 2)">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button class="slide-btn absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/70 hover:bg-blue-600 text-slate-800 hover:text-white rounded-full p-2 z-10" onclick="changeSlide(1, 2)">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                        
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex z-10">
+                            <span class="dot active" onclick="currentSlide(1, 2)"></span>
+                            <span class="dot" onclick="currentSlide(2, 2)"></span>
+                            <span class="dot" onclick="currentSlide(3, 2)"></span>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2 p-8 flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold mb-4 text-slate-900">The Urban Brew Café</h3>
+                        <p class="text-blue-600 font-semibold mb-4">Language: PHP & JavaScript</p>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                          POS Ordering and Booking Management web application for Level 5 Diploma Project.
+                        </p>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-2">
+                                View Demo 
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="scroll-fade project-card bg-slate-50 rounded-2xl overflow-hidden shadow-lg mb-12">
+                <div class="grid md:grid-cols-2">
+                    <div class="p-8 flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold mb-4 text-slate-900">Explorer Prototype</h3>
+                        <p class="text-blue-600 font-semibold mb-4">Prototype Application</p>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            Children Nature Exploration app prototype with Axure RP for Interaction Design. 
+                        </p>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-2">
+                                View Demo 
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="relative bg-slate-200 min-h-[400px]" data-slideshow="3">
+                        <div class="slide active absolute inset-0 flex items-center justify-center text-slate-400">
+                             <img src="images/p31.png" alt="Explorer Screenshot 1">
+                        </div>
+                        <div class="slide absolute inset-0 flex items-center justify-center text-slate-400">
+                             <img src="images/p32.png" alt="Explorer Screenshot 2">
+                        </div>
+                        <div class="slide absolute inset-0 flex items-center justify-center text-slate-400">
+                             <img src="images/p33.png" alt="Explorer Screenshot 3">
+                        </div>
+                        <div class="slide absolute inset-0 flex items-center justify-center text-slate-400">
+                             <img src="images/p34.png" alt="Explorer Screenshot 4">
+                        </div>
+                        
+                        <button class="slide-btn absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/70 hover:bg-blue-600 text-slate-800 hover:text-white rounded-full p-2 z-10" onclick="changeSlide(-1, 3)">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button class="slide-btn absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/70 hover:bg-blue-600 text-slate-800 hover:text-white rounded-full p-2 z-10" onclick="changeSlide(1, 3)">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                        
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex z-10">
+                            <span class="dot active" onclick="currentSlide(1, 3)"></span>
+                            <span class="dot" onclick="currentSlide(2, 3)"></span>
+                            <span class="dot" onclick="currentSlide(3, 3)"></span>
+                            <span class="dot" onclick="currentSlide(4, 3)"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 4 -->
+            <div class="scroll-fade project-card bg-slate-50 rounded-2xl overflow-hidden shadow-lg mb-12">
+                <div class="grid md:grid-cols-2">
+                    <div class="order-2 md:order-1 relative bg-slate-200 min-h-[250px]" data-slideshow="4">
+                        <div class="slide active absolute inset-0 flex items-center justify-center text-slate-400">
+                            <img src="images/p41.png" alt="IdeoBravo Screenshot 1">
+                        </div>
+                        <div class="slide absolute inset-0 flex items-center justify-center text-slate-400">
+                            <img src="images/p42.png" alt="IdeoBravo Screenshot 2">
+                        </div>
+                        <div class="slide absolute inset-0 flex items-center justify-center text-slate-400">
+                            <img src="images/p43.png" alt="IdeoBravo Screenshot 3">
+                        </div>
+                        
+                        <button class="slide-btn absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/70 hover:bg-blue-600 text-slate-800 hover:text-white rounded-full p-2 z-10" onclick="changeSlide(-1, 4)">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button class="slide-btn absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/70 hover:bg-blue-600 text-slate-800 hover:text-white rounded-full p-2 z-10" onclick="changeSlide(1, 4)">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                        
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex z-10">
+                            <span class="dot active" onclick="currentSlide(1, 4)"></span>
+                            <span class="dot" onclick="currentSlide(2, 4)"></span>
+                            <span class="dot" onclick="currentSlide(3, 4)"></span>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2 p-8 flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold mb-4 text-slate-900">IdeoBravo</h3>
+                        <p class="text-blue-600 font-semibold mb-4">Framework: Laravel</p>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                          Ongoing project for integrated Condominium Management service platform.
+                          Expected completion date: January, 2026 
+                        </p>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-2">
+                                View Demo 
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 5 - Mobile Oriented -->
+            <div class="scroll-fade project-card bg-slate-50 rounded-2xl overflow-hidden shadow-lg mb-12">
+                <div class="grid md:grid-cols-[1fr,350px] gap-8 items-center">
+                    <div class="p-8 flex flex-col justify-center">
+                        <div class="flex items-center gap-3 mb-4">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                            </svg>
+                            <h3 class="text-3xl font-bold text-slate-900">M-Hike</h3>
+                        </div>
+                        <p class="text-blue-600 font-semibold mb-4">Language: Kotlin / React Native</p>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            Mobile-based application for Hikers in Native Android(Kotlin) and Hybrid cross-platform (React Native).
+                        </p>
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-slate-900 mb-2">Key Features:</h4>
+                            <ul class="text-slate-600 space-y-1">
+                                <li>• Hike Records</li>
+                                <li>• Weather Integration</li>
+                                <li>• Location Features</li>
+                                <li>• Hike Tracking</li>
+                            </ul>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-2">
+                                View Demo 
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="relative bg-slate-200 h-[500px] w-full max-w-[350px] mx-auto rounded-3xl overflow-hidden shadow-2xl" data-slideshow="5">
+                        <div class="slide active absolute inset-0 flex items-center justify-center text-slate-400">
+                            <img src="images/p61.png" alt="M-Hike Screenshot 1">
+                        </div>
+                        <div class="slide absolute inset-0 flex items-center justify-center text-slate-400">
+                            <img src="images/p62.png" alt="M-Hike Screenshot 2">
+                        </div>
+                        <div class="slide absolute inset-0 flex items-center justify-center text-slate-400">
+                           <img src="images/p63.png" alt="M-Hike Screenshot 3">
+                        </div>
+                        
+                        <button class="slide-btn absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/70 hover:bg-blue-600 text-slate-800 hover:text-white rounded-full p-2 z-10" onclick="changeSlide(-1, 5)">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button class="slide-btn absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/70 hover:bg-blue-600 text-slate-800 hover:text-white rounded-full p-2 z-10" onclick="changeSlide(1, 5)">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                        
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex z-10">
+                            <span class="dot active" onclick="currentSlide(1, 5)"></span>
+                            <span class="dot" onclick="currentSlide(2, 5)"></span>
+                            <span class="dot" onclick="currentSlide(3, 5)"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="scroll-fade project-card bg-slate-50 rounded-2xl overflow-hidden shadow-lg mb-12">
+                <div class="grid md:grid-cols-2">
+                    <div class="order-2 md:order-1 relative bg-slate-200 min-h-[500px]" data-slideshow="6">
+                        <div class="slide active absolute inset-0 flex items-center justify-center text-slate-400">
+                            <img src="images/p53.png" alt="Fit Fury Screenshot 1">
+                        </div>
+                        <div class="slide absolute inset-0 flex items-center justify-center text-slate-400">
+                            <img src="images/p52.png" alt="Fit Fury Screenshot 2">
+                        </div>
+                        <div class="slide absolute inset-0 flex items-center justify-center text-slate-400">
+                            <img src="images/p51.png" alt="Fit Fury Screenshot 3">
+                        </div>
+                        
+                        <button class="slide-btn absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/70 hover:bg-blue-600 text-slate-800 hover:text-white rounded-full p-2 z-10" onclick="changeSlide(-1, 6)">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button class="slide-btn absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/70 hover:bg-blue-600 text-slate-800 hover:text-white rounded-full p-2 z-10" onclick="changeSlide(1, 6)">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                        
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex z-10">
+                            <span class="dot active" onclick="currentSlide(1, 6)"></span>
+                            <span class="dot" onclick="currentSlide(2, 6)"></span>
+                            <span class="dot" onclick="currentSlide(3, 6)"></span>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2 p-8 flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold mb-4 text-slate-900">Fit Fury</h3>
+                        <p class="text-blue-600 font-semibold mb-4">Language: C#</p>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            Window-based form applications for fitness tracking app. 
+                        </p>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-2">
+                                View Demo 
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Footer Section -->
+    <section id="contact" class="py-20 px-6 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="scroll-fade">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Let's Connect</h2>
+                <div class="w-20 h-1 bg-blue-400 mx-auto mb-8"></div>
+                <p class="text-xl text-slate-300 mb-12">
+                    Interested in working together? Feel free to reach out!
+                </p>
+            </div>
+            
+            <div class="scroll-fade mb-12">
+                <a href="mailto:bhonemyatoo18@gmail.com" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
+                    bhonemyatoo18@gmail.com
                 </a>
             </div>
-            <p class="text-slate-300 text-lg mt-4 opacity-40">
-                or reach me at <u>bhonemyatoo18@gmail.com</u>
-            </p>
+            
+            <div class="scroll-fade">
+                <p class="text-slate-300 text-lg mb-8">Follow me on social media</p>
+                <div class="flex justify-center gap-6 mb-12">
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/share/16dxn4v7jA/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" 
+                       class="text-slate-300 hover:text-blue-400 transition-colors duration-300 transform hover:scale-110">
+                        <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/ffelix_xdd?igsh=b3dieG16eDRldXQ%3D&utm_source=qr" target="_blank" rel="noopener noreferrer"
+                       class="text-slate-300 hover:text-pink-400 transition-colors duration-300 transform hover:scale-110">
+                        <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/bhone-myat-oo-87120224b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener noreferrer"
+                       class="text-slate-300 hover:text-blue-300 transition-colors duration-300 transform hover:scale-110">
+                        <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    
+                    <!-- GitHub -->
+                    <a href="https://github.com/BhoneMyatOo17" target="_blank" rel="noopener noreferrer"
+                       class="text-slate-300 hover:text-white transition-colors duration-300 transform hover:scale-110">
+                        <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-700 pt-8">
+                <p class="text-slate-400 text-sm">
+                    © 2024 Bhone Myat Oo. All rights reserved.
+                </p>
+            </div>
         </div>
+    </section>
+
+    <script>
+        // Scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-fade').forEach(el => observer.observe(el));
+
+        // Navbar scroll effect
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Parallax effect for design elements
+        const designElements = document.querySelectorAll('.design-element');
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            designElements.forEach((element, index) => {
+                const speed = (index + 1) * 0.3;
+                const yPos = -(scrolled * speed);
+                const rotation = scrolled * 0.05;
+                element.style.transform = `translateY(${yPos}px) rotate(${rotation}deg)`;
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
         
-        <!-- Footer -->
-        <div class="mt-16 fade-in delay-3">
-            <p class="text-slate-500 text-sm">
-                © 2024 All rights reserved.
-            </p>
-        </div>
-    </div>
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Slideshow functionality
+        let slideIndices = {
+            1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1
+        };
+
+        function changeSlide(n, slideshowId) {
+            showSlides(slideIndices[slideshowId] += n, slideshowId);
+        }
+
+        function currentSlide(n, slideshowId) {
+            showSlides(slideIndices[slideshowId] = n, slideshowId);
+        }
+
+        function showSlides(n, slideshowId) {
+            const container = document.querySelector(`[data-slideshow="${slideshowId}"]`);
+            if (!container) return;
+            
+            const slides = container.querySelectorAll('.slide');
+            const dots = container.querySelectorAll('.dot');
+            
+            if (slides.length === 0) return;
+
+            if (n > slides.length) { slideIndices[slideshowId] = 1; }
+            if (n < 1) { slideIndices[slideshowId] = slides.length; }
+
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+                slide.style.opacity = '0';
+                slide.style.zIndex = '0';
+            });
+            
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            const currentIndex = slideIndices[slideshowId] - 1;
+            slides[currentIndex].classList.add('active');
+            slides[currentIndex].style.opacity = '1';
+            slides[currentIndex].style.zIndex = '1';
+            
+            if (dots[currentIndex]) {
+                dots[currentIndex].classList.add('active');
+            }
+        }
+
+        // Initialize all slideshows
+        document.addEventListener('DOMContentLoaded', function() {
+            for (let i = 1; i <= 6; i++) {
+                showSlides(1, i);
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
