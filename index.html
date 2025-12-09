@@ -190,11 +190,11 @@
                 <img src="./logo.png" alt="Logo" class="h-8 w-auto">
             </a>
             <div class="hidden md:flex space-x-8">
-                <a href="#hero" class="text-blue-600 hover:text-blue-800 transition-colors font-medium">Home</a>
-                <a href="#about" class="text-blue-600 hover:text-blue-800 transition-colors font-medium">About</a>
-                <a href="#techstack" class="text-blue-600 hover:text-blue-800 transition-colors font-medium">Tech Stack</a>
-                <a href="#projects" class="text-blue-600 hover:text-blue-800 transition-colors font-medium">Projects</a>
-                <a href="#contact" class="text-blue-600 hover:text-blue-800 transition-colors font-medium">Contact</a>
+                <a href="#hero" class="text-blue-500 hover:text-blue-800 transition-colors font-medium">Home</a>
+                <a href="#about" class="text-blue-500 hover:text-blue-800 transition-colors font-medium">About</a>
+                <a href="#techstack" class="text-blue-500 hover:text-blue-800 transition-colors font-medium">Tech Stack</a>
+                <a href="#projects" class="text-blue-500 hover:text-blue-800 transition-colors font-medium">Projects</a>
+                <a href="#contact" class="text-blue-500 hover:text-blue-800 transition-colors font-medium">Contact</a>
             </div>
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-btn" class="md:hidden text-slate-900">
@@ -292,77 +292,89 @@
     </section>
 
     <!-- Tech Stack Section -->
-    <section id="techstack" class="py-20 px-6 bg-white">
-        <div class="max-w-6xl mx-auto">
-            <div class="scroll-fade">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-slate-900">Tech Stack</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto mb-4"></div>
-                <p class="text-center text-slate-600 mb-12">Technologies I work with</p>
+<section id="techstack" class="py-20 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        <div class="scroll-fade">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-slate-900">Tech Stack</h2>
+            <div class="w-20 h-1 bg-blue-600 mx-auto mb-4"></div>
+            <p class="text-center text-slate-600 mb-12">Technologies I work with</p>
+        </div>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
+            <div class="scroll-fade tech-icon">
+                <div class="bg-white rounded-xl p-4 md:p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-red-100 rounded-lg flex items-center justify-center p-3">
+                        <img src="svg/laravel.svg" alt="Laravel">
+                    </div>
+                    <h3 class="font-semibold text-base md:text-lg text-slate-900">Laravel</h3>
+                </div>
+            </div>
+
+            <div class="scroll-fade tech-icon">
+                <div class="bg-white rounded-xl p-4 md:p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-yellow-100 rounded-lg flex items-center justify-center p-3">
+                        <img src="svg/js.svg" alt="JavaScript">
+                    </div>
+                    <h3 class="font-semibold text-base md:text-lg text-slate-900">JavaScript</h3>
+                </div>
+            </div>
+
+            <div class="scroll-fade tech-icon">
+                <div class="bg-white rounded-xl p-4 md:p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-cyan-100 rounded-lg flex items-center justify-center p-3">
+                        <img src="svg/tailwind.svg" alt="tailwindcss">
+                    </div>
+                    <h3 class="font-semibold text-base md:text-lg text-slate-900">Tailwind</h3>
+                </div>
             </div>
             
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 md:gap-8 max-w-4xl mx-auto">
-                <!-- PHP -->
-                <div class="scroll-fade tech-icon">
-                    <div class="bg-white rounded-xl p-4 md:p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
-                        <div class="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-blue-100 rounded-lg flex items-center justify-center p-3">
-                            <img src="svg/php.svg" alt="PHP">
-                        </div>
-                        <h3 class="font-semibold text-base md:text-lg text-slate-900">PHP</h3>
+            <div class="scroll-fade tech-icon">
+                <div class="bg-white rounded-xl p-4 md:p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-blue-100 rounded-lg flex items-center justify-center p-3">
+                        <img src="svg/typescript.svg" alt="TypeScript">
                     </div>
+                    <h3 class="font-semibold text-base md:text-lg text-slate-900">TypeScript</h3>
                 </div>
-                
-                <!-- Laravel -->
-                <div class="scroll-fade tech-icon">
-                    <div class="bg-white rounded-xl p-4 md:p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
-                        <div class="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-red-100 rounded-lg flex items-center justify-center p-3">
-                            <img src="svg/laravel.svg" alt="Laravel">
-                        </div>
-                        <h3 class="font-semibold text-base md:text-lg text-slate-900">Laravel</h3>
+            </div>
+
+            <div class="scroll-fade tech-icon">
+                <div class="bg-white rounded-xl p-4 md:p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-indigo-100 rounded-lg flex items-center justify-center p-3">
+                        <img src="svg/php.svg" alt="PHP">
                     </div>
+                    <h3 class="font-semibold text-base md:text-lg text-slate-900">PHP</h3>
                 </div>
-                
-                <!-- JavaScript -->
-                <div class="scroll-fade tech-icon">
-                    <div class="bg-white rounded-xl p-4 md:p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
-                        <div class="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-yellow-100 rounded-lg flex items-center justify-center p-3">
-                            <img src="svg/js.svg" alt="JavaScript">
-                        </div>
-                        <h3 class="font-semibold text-base md:text-lg text-slate-900">JavaScript</h3>
+            </div>
+            
+            <div class="scroll-fade tech-icon">
+                <div class="bg-white rounded-xl p-4 md:p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center p-3">
+                        <img src="svg/kotlin.svg" alt="Kotlin">
                     </div>
+                    <h3 class="font-semibold text-base md:text-lg text-slate-900">Kotlin</h3>
                 </div>
-                
-                <!-- Kotlin -->
-                <div class="scroll-fade tech-icon">
-                    <div class="bg-white rounded-xl p-4 md:p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
-                        <div class="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center p-3">
-                            <img src="svg/kotlin.svg" alt="Kotlin">
-                        </div>
-                        <h3 class="font-semibold text-base md:text-lg text-slate-900">Kotlin</h3>
+            </div>
+            
+            <div class="scroll-fade tech-icon">
+                <div class="bg-white rounded-xl p-4 md:p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center p-3">
+                        <img src="svg/c_sharp.svg" alt="C#">
                     </div>
+                    <h3 class="font-semibold text-base md:text-lg text-slate-900">C#</h3>
                 </div>
-                
-                <!-- React Native -->
-                <div class="scroll-fade tech-icon">
-                    <div class="bg-white rounded-xl p-4 md:p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
-                        <div class="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-cyan-100 rounded-lg flex items-center justify-center p-3">
-                             <img src="svg/react.svg" alt="React Native">
-                        </div>
-                        <h3 class="font-semibold text-base md:text-lg text-slate-900">React Native</h3>
+            </div>
+            
+            <div class="scroll-fade tech-icon">
+                <div class="bg-white rounded-xl p-4 md:p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-cyan-100 rounded-lg flex items-center justify-center p-3">
+                     <img src="svg/react.svg" alt="React Native">
                     </div>
-                </div>
-                
-                <!-- C# -->
-                <div class="scroll-fade tech-icon">
-                    <div class="bg-white rounded-xl p-4 md:p-8 shadow-lg hover:shadow-xl transition-shadow text-center">
-                        <div class="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center p-3">
-                            <img src="svg/c_sharp.svg" alt="C#">
-                        </div>
-                        <h3 class="font-semibold text-base md:text-lg text-slate-900">C#</h3>
-                    </div>
+                    <h3 class="font-semibold text-base md:text-lg text-slate-900">React Native</h3>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Projects Section -->
     <section id="projects" class="py-20 px-6 bg-slate-100">
