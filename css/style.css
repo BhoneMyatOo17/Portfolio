@@ -420,6 +420,10 @@ video {
   visibility: visible
 }
 
+.fixed {
+  position: fixed
+}
+
 .absolute {
   position: absolute
 }
@@ -430,6 +434,11 @@ video {
 
 .inset-0 {
   inset: 0
+}
+
+.inset-x-0 {
+  left: 0;
+  right: 0
 }
 
 .bottom-3 {
@@ -448,12 +457,20 @@ video {
   right: .75rem
 }
 
+.top-0 {
+  top: 0
+}
+
 .top-1\/2 {
   top: 50%
 }
 
 .z-10 {
   z-index: 10
+}
+
+.z-50 {
+  z-index: 50
 }
 
 .order-1 {
@@ -642,12 +659,12 @@ video {
   height: 24rem
 }
 
-.h-full {
-  height: 100%
+.h-\[18px\] {
+  height: 18px
 }
 
-.max-h-full {
-  max-height: 100%
+.h-full {
+  height: 100%
 }
 
 .min-h-screen {
@@ -690,6 +707,10 @@ video {
   width: 2.25rem
 }
 
+.w-\[18px\] {
+  width: 18px
+}
+
 .w-full {
   width: 100%
 }
@@ -720,10 +741,6 @@ video {
 
 .max-w-\[360px\] {
   max-width: 360px
-}
-
-.max-w-full {
-  max-width: 100%
 }
 
 .max-w-xl {
@@ -758,10 +775,6 @@ video {
 
 .resize {
   resize: both
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr))
 }
 
 .flex-col {
@@ -818,10 +831,6 @@ video {
 
 .gap-4 {
   gap: 1rem
-}
-
-.gap-5 {
-  gap: 1.25rem
 }
 
 .gap-6 {
@@ -8463,10 +8472,6 @@ video {
   padding: .5rem
 }
 
-.p-3 {
-  padding: .75rem
-}
-
 .p-6 {
   padding: 1.5rem
 }
@@ -8508,6 +8513,11 @@ video {
 .py-2\.5 {
   padding-top: .625rem;
   padding-bottom: .625rem
+}
+
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem
 }
 
 .py-24 {
@@ -8606,6 +8616,11 @@ video {
 
 .text-5xl {
   font-size: 3rem;
+  line-height: 1
+}
+
+.text-7xl {
+  font-size: 4.5rem;
   line-height: 1
 }
 
@@ -12506,19 +12521,10 @@ video {
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color)
 }
 
-.shadow-sm {
-  --tw-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color)
-}
-
-.shadow-sm,
-.shadow-xl {
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-}
-
 .shadow-xl {
   --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 8px 10px -6px rgba(0, 0, 0, .1);
-  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color)
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 .ring-1 {
@@ -12530,11 +12536,6 @@ video {
 .ring-slate-100 {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(241 245 249/var(--tw-ring-opacity, 1))
-}
-
-.ring-slate-200 {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(226 232 240/var(--tw-ring-opacity, 1))
 }
 
 .invert {
@@ -12556,12 +12557,6 @@ video {
 
 .transition-colors {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-  transition-duration: .15s
-}
-
-.transition-shadow {
-  transition-property: box-shadow;
   transition-timing-function: cubic-bezier(.4, 0, .2, 1);
   transition-duration: .15s
 }
@@ -12636,6 +12631,23 @@ body {
   box-shadow: 0 1px 0 var(--border), 0 4px 20px rgba(0, 0, 0, .06)
 }
 
+.nav-logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity .2s
+}
+
+.nav-logo:hover {
+  opacity: .8
+}
+
+.nav-logo img {
+  display: block;
+  height: 2rem;
+  width: auto
+}
+
 .nav-link {
   position: relative;
   font-weight: 500;
@@ -12664,6 +12676,14 @@ body {
 }
 
 .nav-link:hover:after {
+  transform: scaleX(1)
+}
+
+.nav-link.active {
+  color: #4f46e5
+}
+
+.nav-link.active:after {
   transform: scaleX(1)
 }
 
@@ -12756,7 +12776,6 @@ body {
   padding: .75rem 1.75rem;
   font-size: .9375rem;
   transition: opacity .2s, transform .2s;
-  box-shadow: 0 4px 14px rgba(79, 70, 229, .3);
   border: none;
   touch-action: manipulation
 }
@@ -12840,30 +12859,27 @@ body {
   display: inline-flex;
   cursor: pointer;
   align-items: center;
-  gap: .625rem;
-  border-radius: .75rem;
-  font-weight: 700;
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255/var(--tw-text-opacity, 1));
+  justify-content: center;
+  border-radius: .5rem;
+  font-weight: 600;
   text-decoration-line: none;
-  background: linear-gradient(135deg, #7c3aed, #4f46e5);
-  padding: .875rem 2rem;
+  background: #fff;
+  color: #4f46e5;
+  border: 1.5px solid #c7d2fe;
+  padding: .75rem 1.75rem;
   font-size: 1rem;
-  letter-spacing: .01em;
-  box-shadow: 0 6px 20px rgba(124, 58, 237, .35);
-  transition: opacity .2s, transform .2s, box-shadow .2s;
-  border: none;
+  transition: background-color .2s, border-color .2s;
   touch-action: manipulation
 }
 
 .btn-work:hover {
-  opacity: .92;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(124, 58, 237, .4)
+  background: #eef2ff;
+  border-color: #4f46e5
 }
 
-.btn-work:active {
-  transform: translateY(0)
+.btn-work:focus-visible {
+  outline: 3px solid #c7d2fe;
+  outline-offset: 2px
 }
 
 .badge {
@@ -12992,35 +13008,35 @@ body {
 }
 
 #sn-tree {
-  width: clamp(150px, 17vw, 240px);
+  width: min(17vw, 37.4vh);
   bottom: 0;
   left: 0;
   opacity: .82
 }
 
 #sn-moon {
-  width: clamp(200px, 22vw, 300px);
+  width: min(22vw, 48.4vh);
   top: 0;
   right: 0;
   opacity: .75
 }
 
 #sn-houses {
-  width: clamp(220px, 28vw, 400px);
+  width: min(28vw, 61.6vh);
   bottom: 0;
   right: 0;
   opacity: .7
 }
 
 #sn-left-swirl {
-  width: clamp(200px, 28vw, 400px);
+  width: min(28vw, 61.6vh);
   top: 25%;
   left: 0;
   opacity: .65
 }
 
 #sn-right-swirl {
-  width: clamp(190px, 26vw, 380px);
+  width: min(26vw, 57.2vh);
   top: 50%;
   right: 0;
   transform: translateY(-50%);
@@ -13034,41 +13050,59 @@ body {
     padding-top: 5rem;
     padding-bottom: 3rem
   }
+}
 
-  #sn-tree {
-    width: 52vw;
-    bottom: 0;
-    left: -4vw;
-    opacity: .75
+@media (max-width:768px),
+(orientation:portrait) {
+  .sn-el {
+    -o-object-fit: contain;
+    object-fit: contain
   }
 
   #sn-moon {
-    width: 52vw;
-    top: -2vw;
-    right: -4vw;
-    opacity: .7
-  }
-
-  #sn-houses {
-    width: 72vw;
-    bottom: 0;
-    right: -6vw;
-    opacity: .7
+    top: 0;
+    right: 0;
+    width: 55%;
+    height: 28%;
+    -o-object-position: right top;
+    object-position: right top
   }
 
   #sn-left-swirl {
-    width: 62vw;
-    top: 22%;
-    left: -8vw;
-    opacity: .65
+    top: 18%;
+    left: 0;
+    width: 45%;
+    height: 37%;
+    -o-object-position: left center;
+    object-position: left center
   }
 
   #sn-right-swirl {
-    width: 58vw;
-    top: 50%;
-    right: -8vw;
-    opacity: .65;
-    transform: translateY(-50%)
+    top: 45%;
+    right: 0;
+    width: 55%;
+    height: 30%;
+    -o-object-position: right center;
+    object-position: right center
+  }
+
+  #sn-tree {
+    left: 0;
+    -o-object-position: left bottom;
+    object-position: left bottom
+  }
+
+  #sn-houses,
+  #sn-tree {
+    bottom: 0;
+    width: 50%;
+    height: 40%
+  }
+
+  #sn-houses {
+    right: 0;
+    -o-object-position: right bottom;
+    object-position: right bottom
   }
 }
 
@@ -13082,36 +13116,73 @@ body {
 }
 
 #fn-star {
-  width: clamp(80px, 9vw, 130px);
+  width: clamp(120px, 13.5vw, 195px);
   top: 12%;
   left: 9%
 }
 
 #fn-wave {
-  width: clamp(200px, 28vw, 420px);
+  width: clamp(300px, 42vw, 630px);
   bottom: 12%;
   right: 4%;
   opacity: .8
 }
 
 #fn-smallstar {
-  width: clamp(50px, 5vw, 80px);
+  width: clamp(75px, 7.5vw, 120px);
   top: 10%;
   right: 7%
 }
 
 @media (max-width:768px) {
   #fn-star {
-    width: 20vw
+    width: 30vw
   }
 
   #fn-wave {
-    width: 52vw
+    width: 78vw
   }
 
   #fn-smallstar {
-    width: 14vw
+    width: 21vw
   }
+}
+
+.social-btn {
+  display: inline-flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 245 249/var(--tw-bg-opacity, 1));
+  --tw-text-opacity: 1;
+  color: rgb(100 116 139/var(--tw-text-opacity, 1));
+  text-decoration-line: none;
+  transition: background-color .2s, color .2s, transform .2s;
+  touch-action: manipulation
+}
+
+.social-btn:hover {
+  color: #fff;
+  transform: translateY(-2px)
+}
+
+.social-facebook:hover {
+  background: #0866ff
+}
+
+.social-instagram:hover {
+  background: #e4405f
+}
+
+.social-github:hover {
+  background: #181717
+}
+
+.social-linkedin:hover {
+  background: #0a66c2
 }
 
 .slide {
@@ -13172,14 +13243,6 @@ body {
   .project-card [data-slideshow] {
     min-height: 240px !important
   }
-}
-
-.tech-icon {
-  transition: transform .25s ease
-}
-
-.tech-icon:hover {
-  transform: translateY(-6px)
 }
 
 .work-card {
@@ -13926,12 +13989,6 @@ code {
   text-decoration-color: #a855f7
 }
 
-.hover\:shadow-md:hover {
-  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -2px rgba(0, 0, 0, .1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-}
-
 .group:hover .group-hover\:translate-x-0\.5 {
   --tw-translate-x: 0.125rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
@@ -13943,8 +14000,12 @@ code {
 }
 
 @media (min-width:640px) {
-  .sm\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr))
+  .sm\:inline-block {
+    display: inline-block
+  }
+
+  .sm\:gap-8 {
+    gap: 2rem
   }
 }
 
@@ -13961,20 +14022,12 @@ code {
     display: block
   }
 
-  .md\:h-20 {
-    height: 5rem
-  }
-
   .md\:h-\[500px\] {
     height: 500px
   }
 
   .md\:min-h-\[300px\] {
     min-height: 300px
-  }
-
-  .md\:w-20 {
-    width: 5rem
   }
 
   .md\:grid-cols-2 {
@@ -13992,10 +14045,6 @@ code {
 
   .md\:p-10 {
     padding: 2.5rem
-  }
-
-  .md\:p-8 {
-    padding: 2rem
   }
 
   .md\:text-2xl {
@@ -14017,8 +14066,15 @@ code {
     font-size: 4.5rem;
     line-height: 1
   }
+
+  .md\:text-8xl {
+    font-size: 6rem;
+    line-height: 1
+  }
 }
 
 @media (min-width:1024px) {
   .lg\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr
+    grid-template-columns: repeat(3, minmax(0, 1fr))
+  }
+}

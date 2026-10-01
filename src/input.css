@@ -75,6 +75,24 @@ body {
   box-shadow: 0 1px 0 var(--border), 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
+/* ── NAV LOGO ── */
+.nav-logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.nav-logo:hover {
+  opacity: 0.8;
+}
+
+.nav-logo img {
+  display: block;
+  height: 2rem;
+  width: auto;
+}
+
 /* ── NAV LINK ── */
 .nav-link {
   position: relative;
@@ -104,6 +122,14 @@ body {
 }
 
 .nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.nav-link.active {
+  color: #4f46e5;
+}
+
+.nav-link.active::after {
   transform: scaleX(1);
 }
 
@@ -198,7 +224,6 @@ body {
   padding: 0.75rem 1.75rem;
   font-size: 0.9375rem;
   transition: opacity 0.2s, transform 0.2s;
-  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
   border: none;
   touch-action: manipulation;
 }
@@ -260,25 +285,24 @@ body {
 }
 
 .btn-work {
-  @apply inline-flex items-center gap-[0.625rem] font-bold text-white rounded-xl no-underline cursor-pointer;
-  background: linear-gradient(135deg, #7c3aed, #4f46e5);
-  padding: 0.875rem 2rem;
+  @apply inline-flex items-center justify-center font-semibold rounded-lg no-underline cursor-pointer;
+  background: #ffffff;
+  color: #4f46e5;
+  border: 1.5px solid #c7d2fe;
+  padding: 0.75rem 1.75rem;
   font-size: 1rem;
-  letter-spacing: 0.01em;
-  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
-  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
-  border: none;
+  transition: background-color 0.2s, border-color 0.2s;
   touch-action: manipulation;
 }
 
 .btn-work:hover {
-  opacity: 0.92;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(124, 58, 237, 0.4);
+  background: #eef2ff;
+  border-color: #4f46e5;
 }
 
-.btn-work:active {
-  transform: translateY(0);
+.btn-work:focus-visible {
+  outline: 3px solid #c7d2fe;
+  outline-offset: 2px;
 }
 
 /* ── BADGE / TAG / CHIP ── */
@@ -397,35 +421,35 @@ body {
 }
 
 #sn-tree {
-  width: clamp(150px, 17vw, 240px);
+  width: min(17vw, 37.4vh);
   bottom: 0;
   left: 0;
   opacity: 0.82;
 }
 
 #sn-moon {
-  width: clamp(200px, 22vw, 300px);
+  width: min(22vw, 48.4vh);
   top: 0;
   right: 0;
   opacity: 0.75;
 }
 
 #sn-houses {
-  width: clamp(220px, 28vw, 400px);
+  width: min(28vw, 61.6vh);
   bottom: 0;
   right: 0;
   opacity: 0.70;
 }
 
 #sn-left-swirl {
-  width: clamp(200px, 28vw, 400px);
+  width: min(28vw, 61.6vh);
   top: 25%;
   left: 0;
   opacity: 0.65;
 }
 
 #sn-right-swirl {
-  width: clamp(190px, 26vw, 380px);
+  width: min(26vw, 57.2vh);
   top: 50%;
   right: 0;
   transform: translateY(-50%);
@@ -441,42 +465,53 @@ body {
     padding-top: 5rem;
     padding-bottom: 3rem;
   }
+}
 
-  /* Bigger elements on mobile, overlaps are fine */
-  #sn-tree {
-    width: 52vw;
-    bottom: 0;
-    left: -4vw;
-    opacity: 0.75;
+@media (max-width: 768px),
+(orientation: portrait) {
+  .sn-el {
+    object-fit: contain;
   }
 
   #sn-moon {
-    width: 52vw;
-    top: -2vw;
-    right: -4vw;
-    opacity: 0.70;
-  }
-
-  #sn-houses {
-    width: 72vw;
-    bottom: 0;
-    right: -6vw;
-    opacity: 0.70;
+    top: 0;
+    right: 0;
+    width: 55%;
+    height: 28%;
+    object-position: right top;
   }
 
   #sn-left-swirl {
-    width: 62vw;
-    top: 22%;
-    left: -8vw;
-    opacity: 0.65;
+    top: 18%;
+    left: 0;
+    width: 45%;
+    height: 37%;
+    object-position: left center;
   }
 
+  /* top 45% is shifted up by half its height by the animation, so it sits at 30%–60% */
   #sn-right-swirl {
-    width: 58vw;
-    top: 50%;
-    right: -8vw;
-    opacity: 0.65;
-    transform: translateY(-50%);
+    top: 45%;
+    right: 0;
+    width: 55%;
+    height: 30%;
+    object-position: right center;
+  }
+
+  #sn-tree {
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 40%;
+    object-position: left bottom;
+  }
+
+  #sn-houses {
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    height: 40%;
+    object-position: right bottom;
   }
 }
 
@@ -490,14 +525,14 @@ body {
 
 /* star.png — top-left */
 #fn-star {
-  width: clamp(80px, 9vw, 130px);
+  width: clamp(120px, 13.5vw, 195px);
   top: 12%;
   left: 9%;
 }
 
 /* wave.png — bottom-right, not hugging the corner */
 #fn-wave {
-  width: clamp(200px, 28vw, 420px);
+  width: clamp(300px, 42vw, 630px);
   bottom: 12%;
   right: 4%;
   opacity: 0.8;
@@ -505,23 +540,51 @@ body {
 
 /* smallstar.png — top-right */
 #fn-smallstar {
-  width: clamp(50px, 5vw, 80px);
+  width: clamp(75px, 7.5vw, 120px);
   top: 10%;
   right: 7%;
 }
 
 @media (max-width: 768px) {
   #fn-star {
-    width: 20vw;
+    width: 30vw;
   }
 
   #fn-wave {
-    width: 52vw;
+    width: 78vw;
   }
 
   #fn-smallstar {
-    width: 14vw;
+    width: 21vw;
   }
+}
+
+/* ── SOCIAL BUTTONS (contact) ── */
+.social-btn {
+  @apply inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-slate-500 no-underline;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+  touch-action: manipulation;
+}
+
+.social-btn:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.social-facebook:hover {
+  background: #0866ff;
+}
+
+.social-instagram:hover {
+  background: #e4405f;
+}
+
+.social-github:hover {
+  background: #181717;
+}
+
+.social-linkedin:hover {
+  background: #0a66c2;
 }
 
 /* ── SLIDESHOW (home projects) ── */
@@ -583,15 +646,6 @@ body {
   .project-card [data-slideshow] {
     min-height: 240px !important;
   }
-}
-
-/* ── TECH ICON (home) ── */
-.tech-icon {
-  transition: transform 0.25s ease;
-}
-
-.tech-icon:hover {
-  transform: translateY(-6px);
 }
 
 /* ── WORK CARD (work) ── */

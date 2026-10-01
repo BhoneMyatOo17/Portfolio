@@ -247,16 +247,22 @@ function initFooterParallax() {
 
     if (!targets.length) return;
 
+    function footerProgress(scrollY, sectionTop, sectionHeight) {
+        const pageBottom = document.documentElement.scrollHeight - window.innerHeight;
+        const fullyIn    = Math.min(sectionTop + sectionHeight - window.innerHeight, pageBottom);
+        const start      = sectionTop - window.innerHeight;
+        const raw        = (scrollY - start) / Math.max(fullyIn - start, 1);
+        return Math.min(Math.max(raw, 0), 1);
+    }
+
     function tick(ts) {
         const sectionTop    = contactSection.offsetTop;
         const sectionHeight = contactSection.offsetHeight;
         const scrollY       = window.scrollY;
 
         // progress: 0 = section hasn't entered viewport yet, 1 = fully in view
-        // We use a tighter window (just viewport height) so the animation plays
-        // as the section scrolls in, and reverses when scrolling back up.
-        const raw = (scrollY + window.innerHeight - sectionTop) / window.innerHeight;
-        const progress = Math.min(Math.max(raw, 0), 1);
+        // (or the bottom of the page is reached). Reverses when scrolling back up.
+        const progress = footerProgress(scrollY, sectionTop, sectionHeight);
 
         // Ease the progress so it feels smooth at both ends
         const eased = progress < 0.5
@@ -291,9 +297,7 @@ function initFooterParallax() {
     });
 
     function updateOpacity() {
-        const sectionTop = contactSection.offsetTop;
-        const raw        = (window.scrollY + window.innerHeight - sectionTop) / window.innerHeight;
-        const progress   = Math.min(Math.max(raw, 0), 1);
+        const progress = footerProgress(window.scrollY, contactSection.offsetTop, contactSection.offsetHeight);
         const eased      = progress < 0.5
             ? 2 * progress * progress
             : 1 - Math.pow(-2 * progress + 2, 2) / 2;
